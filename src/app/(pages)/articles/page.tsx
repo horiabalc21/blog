@@ -29,10 +29,10 @@ export default function ArticlesPage() {
 
   const fetchArticles = () => {
     setLoading(true);
-    fetch("/api/articles")
+    fetch("/api/articles?all=true")
       .then((res) => res.json())
       .then((data) => {
-        setArticles(data);
+        setArticles(data.articles || []);
         setLoading(false);
         console.log(data);
       })
