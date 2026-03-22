@@ -296,15 +296,19 @@ export default function BlogPage() {
                 </article>
               );
             })}
-            {/* Load More Button */}
-            {offset < total && (
-              <div className={styles.loadMoreWrapper}>
-                  <DefaultButton type='button' text={loadingMore ? "Loading..." : "Load More"} onClick={handleLoadMore} disabled={loadingMore} />
-              </div>
-            )}
+
           </div>
         )}
       </div>
+        {/* Load More Button */}
+        {offset < total && (
+            <div className={styles.loadMoreWrapper}>
+                {/*<button className={styles.loadMoreBtn} onClick={handleLoadMore} disabled={loadingMore}>*/}
+                {/*  {loadingMore ? "Loading..." : "Load More"}*/}
+                {/*</button>*/}
+                <DefaultButton type='button' text={loadingMore ? "Loading..." : "Load More"} onClick={handleLoadMore} disabled={loadingMore} />
+            </div>
+        )}
     </div>
   );
 }

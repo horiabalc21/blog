@@ -14,17 +14,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     switch (req.method) {
       case "GET": {
-        // Pagination support
+        // Pagination support and only published articles
         const limit = parseInt(req.query.limit as string) || 20;
         const offset = parseInt(req.query.offset as string) || 0;
-        // Get total count
-        const total = await articleRepo.count();
-        // Get paginated articles
+        // Get total count of published articles
+        const total = await articleRepo.count({ where: { published: true } });
+        // Get paginated published articles
         const articles = await articleRepo.find({
           relations: ["author", "category"],
           order: { id: "DESC" },
           skip: offset,
           take: limit,
+          where: { published: true },
         });
         return res.status(200).json({ articles, total });
       }
